@@ -1,0 +1,1 @@
+This material is licensed under the [Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 license.](http://creativecommons.org/licenses/by-nc-nd/3.0/us/)
