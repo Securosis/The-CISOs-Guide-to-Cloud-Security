@@ -86,6 +86,8 @@ All this without once mentioning multitenancy or outsourcing.
 
 If you didn't already, you should now have a decent understanding of how cloud computing differs from traditional infrastructure. Now it's time to switch gears and provide guidance on how to evolve your security to address the shifting risks. 
 
+These examples are far from comprehensive, but were selected to give a good start and a sample of how to think differently about cloud security.
+
 ###General Principles
 
 As we keep emphasizing, adopting cloud necessarily increase your overall risks; some increase, some decrease, and the goal is to leverage the security advantages of cloud so you can move resources to cover the new gaps. There are a few general principles of approaching the problem that help put you in the proper state of mind:
@@ -151,10 +153,25 @@ We have written a [full paper on infrastructure encryption for cloud](https://se
 
 ###Federate and Automate Identity Management
 
+Managing users and access in cloud introduces two major headaches:
 
-* Federate and automate identity
-    * To control access to cloud services
-    * Dynamic host privileges
+* Controlling access to external services without having to manage them all as independent sets of users.
+* Managing access to potentially thousands or tens of thousands of ephemeral virtual machines, some of which may only exist for a few hours.
+
+In the first case, and often the second, federated identity is the way to go:
+
+* For external cloud services, especially SaaS, rely on SAML-based federated identity linked to your existing directory server. If you deal with a lot of services this can become messy to manage and program yourself,  so consider one of the identity management proxies or services on the market designed specifically to tackle the problem.
+* For access to your actual virtual servers consider managing users with a dynamic privilege management agent designed for cloud. Normally you embed SSH keys (or known Windows admin passwords) as part of an instances initialization process (the cloud controller handles this for you). This is highly problematic for privileged users at scale, and even straight directory server integration is often quite difficult. Specialized agents designed for cloud computing dynamically update users, privileges, and credentials at cloud speeds and scale.
+
+###Adapt Network Security
+ 
+ Networks are completely virtualized in cloud computing, although different platforms use different architectures and implementation mechanisms, complicating the situation. Despite that diversity, there are some consistent traits to focus on. The two biggest issues are:
+ 
+ * Virtual networks may destroy normal network traffic visibility. A network firewall or IDS won't see traffic between two virtual machines on the same physical server, encrypted traffic between nodes, or traffic in certain Software Defined Networking (SDN) implementations. 
+ * Images can be launched anywhere in your cloud, which means a server may pop up in an unexpected, unprotected, location. dynamic....."..."
+ * 
+ 
+ 
 * Adapt network security
     * Lose visibility, so may need to embed more in the host
     * Virtual appliances may not scale
