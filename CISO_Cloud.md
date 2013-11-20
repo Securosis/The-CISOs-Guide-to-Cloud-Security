@@ -166,31 +166,33 @@ In the first case, and often the second, federated identity is the way to go:
 
 ###Adapt Network Security
 
-Networks are completely virtualized in cloud computing, although different platforms use different architectures and implementation mechanisms, complicating the situation. Despite that diversity there are consistent traits to focus on. The key issues are:
+Networks are completely virtualized in cloud computing, although different platforms use different architectures and implementation mechanisms, complicating the situation. Despite that diversity there are consistent traits to focus on. The key issues come down to loss of visibility using normal techniques, and adapting to the dynamic nature of cloud computing. 
 
- * Virtual networks may destroy normal network traffic visibility. A network firewall or IDS won't see traffic between two virtual machines on the same physical server, encrypted traffic between nodes, or traffic in certain Software Defined Networking (SDN) implementations.
- * Images can be launched anywhere in your cloud, which means a server may pop up in an unexpected, unprotected, location. dynamic....."..."
- *
+All public cloud providers disable networking sniffing, and that is an option on all private cloud platforms. A bad guy can't hack a box and sniff the entire network, but it also means you can't implement IDS and other network security the same as in traditional infrastructure. Even when you can place a physical box on the network hosting the cloud, you will miss traffic between instances on the same physical server, and highly dynamic network changes and instances appear and disappear too quickly to be treated like regular servers. You can sometimes use a virtual appliance instead, but unless the tool is designed to cloud specifications, even one that works in a virtual environment will crack in a cloud due to performance and functional limitations.
 
+While you can embed more host network security in the images your virtual machines are based on, the standard tools typically won't work since they won't know exactly where on the network they will pop up on, nor the addresses of what they need to talk to. On a positive note, all cloud platforms include basic network security. Set your defaults properly, and every single server effectively comes with its own firewall.
 
-* Adapt network security
-    * Lose visibility, so may need to embed more in the host
-    * Virtual appliances may not scale
-        * Even when. They do, may not be economically viable
-    * Need to be host aware
-* Leverage cloud characteristics
-    * Stateless security
-        * You always know where ever server is, in real time
-        * You can always know the configuration and have access to extensive metadata
-        * Your network architecture is but an API call away
-        * All is consumable using standard data formats and APIs
-            * Incredible opportunity to integrate with cloud-aware security tools
-    * Automated security
-        * Set a security policy, link with DevOps, and have it enforced on every node
-        * Centrally manage the network unreal time
-        * Add a security abstraction layer, that is still part of the cloud management layer
-    * Standardize security with PaaS
-    * Software Defined Security
+We recommend:
+
+* Design a good baseline of Security Groups (the basic firewalls that secure the networking of each instance), and use tags or other mechanisms to automatically apply them based on server characteristics. A Security Group is essentially a portable firewall around every instance, supporting compartmentalization that is extremely difficult in a traditional network.
+* Use a host firewall, or host firewall management tool, designed for the cloud platform or provider you are working with. These connect to the cloud itself to pull metadata and configure themselves more-dynamically than a standard host firewall.
+* Also consider pushing more network security, including IDS and logging, into your instances. 
+* Prefer virtual network security appliances that support cloud APIs and are designed for the cloud platform or provider. For example, instead of forcing you to route all your virtual traffic to it as if you were on a physical network, the tool could distribute its own workload (sometimes even integrating with the hypervisor).
+* Take advantage of cloud APIs. It's very easy to pull every Security Group rule, then locate every instance. Combined with some additional basic tools, you could then automate finding errors and omissions. Many cloud deployments do this today as a matter of course.
+* Whatever tools you use, they *must* be able to account for the high rate of servers appearing and disappearing in a cloud. Rules must follow the hosts.
+
+###Leverage Cloud Characteristics
+
+This section is a little more advanced, but there can be some significant security advantages once you start to leverage the characteristics of the cloud. Instead of patching, just launch properly-configured new servers and swap over on a cloud load balancer. Find every single system in your cloud deployment, including extensive metadata, with a simple API call. Deploy applications on Platform as a Service and stop worrying about misconfigured servers. Here are some real world examples and recommendations to get you started, but these barely scratch the surface:
+
+* Use the *immutable servers* concept instead of patching. Few sysadmins patch servers without trepidation, and this is a frequent source of downtime. Eliminate the worry by running your applications behind cloud load balancers, and instead of patching servers, launch new ones with the updated software. Then slowly (or quickly) switch traffic to the new, "patched" servers. If something doesn't work, your old servers are still there and you can pass traffic back. It's the equivalent of having a totally spare datacenter laying around.
+* Leverage *stateless security* strategies to mange your environment in real time. Normally we rely on knowledge from scanners and assessments to understand our assets and environments, which can be out of date and difficult to keep complete. Since the cloud controller knows where everything is, how it is configured (to some degree), and even who owns it (or created it) we have access to a constant stream of comprehensive, real-time data. A server can't exist in the cloud without the controller knowing about it. Even your entire network architecture is but an API call away, no scanners needed. Use these to track and manage your security state in effectively real time.
+* Automate more security. Embed security configurations and agents into images, or inject them into instances when they launch. Every virtual machine, when launched, can then automatically configure host-level security (especially if they can communicate with a management server designed for the cloud). For example, the host can register itself with a configuration management server, then secure running services by default depending on what the server is designed for. You could even automatically adjust Security Group firewall rules based on the software services running on the host, who owns it, and where it is in your application stack. 
+* Standardize security with Platform as a Service. Hate patching database servers or configuring them properly? Struggle with developers and admins who open up too many services on application servers? Use Platform as a Service instead and improve your ability to standardize security.
+* Build a security abstraction layer. Nothing prevents your security team from using the same cloud APIs and management tools as your administrators and developers. Configured properly, this provides security oversight and control that doesn't interfere with development or operations. For example, you could restrict management of cloud IAM to the security team, which allows them to assume management of a server in a security incident. The security team could control key network Security Groups and security in production, while still allowing developers to manage it themselves in more-isolated development. Embed a host security agent into all images (or instances, using launch scripts) and security gains a hook into every running virtual machine.
+* Move to *Software Defined Security*. This concept is an extension of basic automation. Since nothing prevents security from writing their own programs using cloud APIs, and the APIs of security and operations tools, you can create powerful, agile, security controls. For example, you can write a small program to find every instance in your environment that isn't linked into your configuration management tool, checking every few minutes. The tool would identify who launched the server, the operating system, and where it is on the network and the network security around it. You could, with a keystroke, take control of that server, notify the owner, and isolate it on the network until you know what it is for, and integrate it into your configuration management and enforce security policies. All with somewhere around 100 lines of code.
+
+These should get you thinking, but start to show how cloud can nearly eradicate certain security problems and allow you to shift resources.
 
 ##Real World Examples
 
