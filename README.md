@@ -12,4 +12,6 @@ Securosis has long followed our [Totally Transparent Research process](https://s
 
 This paper is being posted as a complete first draft, but most papers will be posted in pieces as we post them on the blog. We will collect feedback from both systems, especially because we are still learning how to use GitHub to write and host research.
 
+We posted a [GitHub tutorial on our site](https://securosis.com/blog/how-to-edit-our-research-on-github) in case you're new to the platform.
+
 Please post suggestions here, or feel free to email me at rmogull@securosis.com.
