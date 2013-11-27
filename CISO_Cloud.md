@@ -14,7 +14,7 @@ Cloud computing is a radically different technology model -- not just the latest
 
 Sometimes this means building your own cloud in your own datacenter; other times it means renting infrastructure, platforms, and applications from public providers over the Internet. Most organizations will use a combination of both. Public cloud services eliminate most capital expenses and shift them to on-demand operational costs. Private clouds allow more *efficient* use of capital, tend to reduce operational costs, and increase the responsiveness of technology to internal needs.
 
-Between the business benefits and current adoption rates, we expect cloud computing to become the dominant technology model over the next ten to fifteen years. As we make this transition *it is the technology that create clouds, rather than the increased use of shared infrastructure, that really matters for security*. Multitenancy is more an emergent property of cloud computing than a defining characteristic.
+Between the business benefits and current adoption rates, we expect cloud computing to become the dominant technology model over the next ten to fifteen years. As we make this transition *it is the technology that creates clouds, rather than the increased use of shared infrastructure, that really matters for security*. Multitenancy is more an emergent property of cloud computing than a defining characteristic.
 
 ###Security Is Evolving for the Cloud
 
@@ -22,7 +22,7 @@ As you will see, cloud computing isn't more or less secure than traditional infr
 
 Cloud security focuses on managing the different risks associate with abstraction and automation. Mutitenancy tends to be more a compliance issue than a security problem, and we will cover both aspects. Infrastructure and applications are opened up to network-based management via Internet APIs. Everything from core network routing to creating and destroying entire application stacks is now possible using command lines and web interfaces. The early security focus has been on managing risks introduced by highly dynamic virtualized environments such as autoscaled servers, and broad network access, including a major focus on compartmentalizing cloud management.
 
-Over time the focus is gradually shifting to hardening the cloud infrastructure, platforms, and applications, and then adapting security to use the cloud to *improve* security. For example, the need for data encryption increases over time as you migrate more sensitive data into the cloud. But the complexities of internal network compartmentalization and server patching are dramatically reduced as you leverage cloud infrastructure.
+Over time the focus is gradually shifting to hardening the cloud infrastructure, platforms, and applications, and then adapting approaches to use the cloud to *improve* security. For example, the need for data encryption increases over time as you migrate more sensitive information into the cloud. But the complexities of internal network compartmentalization and server patching are dramatically reduced as you leverage cloud infrastructure.
 
 We expect to eventually see more security teams hook into the cloud fabric itself -- bridging existing gaps between security tools and infrastructure and applications with *Software Defined Security*. The same APIs and programming techniques that power cloud computing can provide highly-integrated dynamic and responsive security controls -- [this is already happening](https://securosis.com/research/publication/a-practical-example-of-software-defined-security).
 
@@ -36,7 +36,7 @@ These differences boil down to *abstraction* and *automation*, which separate cl
 
 ###Abstraction
 
-Abstraction is the extensive use of multiple virtualization technologies to separate compute, network, storage, information, and application resources from the underlying physical infrastructure. In cloud computing we use this to convert physical infrastructure into a *resource pool* that is sliced, diced, provisioned, deprovisioned, and configured on demand, using the automation we will talk about next.
+Abstraction is the extensive use of multiple virtualization technologies to separate compute, network, storage, information, and application resources from the underlying physical infrastructure. In cloud computing we use this to convert physical infrastructure into a *resource pool* that is sliced, diced, provisioned, deprovisioned, and configured on demand, using the automation we will talk about next. 
 
 It really is a bit like the matrix. Individual servers run little more than a hypervisor with connectivity software to link them into the cloud, and the rest is managed by the cloud controller. Virtual networks overlay the physical network, with dynamic configuration of routing at all levels. Storage hardware is similarly pooled, virtualized, and then managed by the cloud control layers. The entire physical infrastructure, less some dedicated management components, becomes a collection of resource pools. Servers, applications, and everything else runs on top of the virtualized environment.
 
@@ -53,11 +53,11 @@ We have focused on *Infrastructure as a Service*, but the same issues apply to *
 
 Virtualization has existed for a long time. The real power cloud computing adds is *automation*. In basic virtualization and virtual data centers we still rely on administrators to manually provision and manage our virtual machines, networks, and storage. Cloud computing turns these tasks over to the cloud controller to coordinate all these pieces (and more) using *orchestration*.
 
-Users ask for resources via web page or API call, such as a new server with 1tb of storage on a particular subnet, and the cloud determines how best to provision it from the resource pool; then it handles installation, configuration, and coordinating all the networking, storage, and compute resources to pull everything together into a functional and accessible server. No human administrator required.
+Users ask for resources via web page or API call, such as a new server with 1tb of storage on a particular subnet, and the cloud management software determines how best to provision it from the resource pool; then it handles installation, configuration, and coordinating all the networking, storage, and compute resources to pull everything together into a functional and accessible server. No human administrator required.
 
 Or the cloud can monitor demand on a cluster and add and remove fully load-balanced and configured systems based on rules, such as average system utilization over a specified threshold. Need more resources? Add virtual servers. Systems underutilized? Drop them back into the resource pool. In public cloud computing this keeps costs down as you expand and contract based on what you need. In private clouds it frees resources for other projects and requirements, but you still need a shared resource pool to handle overall demand. But you are no longer stuck with under-utilized physical boxes in one corner of your data center and inadequate capacity in another.
 
-The same applies to platforms (including databases or application servers) and software; you can expand and contract database storage, software application server capacity, the number of supported users, and storage as needed -- without additional capital investment.
+This is true for all three main cloud delivery methods - *Infrastructure as a Service* (IaaS), *Platform as a Service* (PaaS) and *Software as a Service* (IaaS). You can expand and contract database storage, software application server capacity, the number of supported users, and storage as needed -- without additional capital investment.
 
 In the real world it isn't always so clean. Heavy use of public cloud may exceed the costs of owning your own infrastructure. Managing your own private cloud is no small task, and is ripe with pitfalls. And abstraction does reduce performance at certain levels, at least for now. But with the right planning, and as the technology continues to evolve, the business advantages are undeniable.
 
@@ -77,7 +77,7 @@ Here are a few examples that highlight the impact of abstraction and automation 
 * **Management Credentials:** The entire infrastructure deployed on the cloud is managed, even down to the network and server level, using API calls and perhaps web interfaces. Administrator tools typically keep these credentials in memory as environment variables or the registry, making them accessible even without administrative control over the cloud admin's workstation. Also, most clouds don't provide an audit log of these commands. Many organizations fail to compartmentalize the rights of cloud administrators, leaving their entire infrastructure open to a single compromised system.
 * **Software Defined Security:** With only 20 lines of code you can connect to your cloud over one API, your configuration management tool with another, and your security tool with a third. You can instantly assess the configuration and security of every server in your environment, without any scanning, in real time. This is nearly impossible with traditional security tools.
 
-Snapshots highlights some of the risks of abstraction. Autoscaling, some risks of automation, and management credentials, the risks of both. But Software Defined Security and immutable servers offer advantages. We will dig into specifics next, now that we have highlighted the core differences.
+Snapshots highlight some of the risks of abstraction. Autoscaling, some risks of automation, and management credentials, the risks of both. But Software Defined Security and immutable servers offer advantages. We will dig into specifics next, now that we have highlighted the core differences.
 
 And all that without mentioning multitenancy or outsourcing.
 
@@ -107,7 +107,7 @@ These principles will get you thinking in cloud terms, but let's look at some sp
 
 The management plane is the administrative interfaces, web and API, used to manage your cloud. It exists in all types of cloud computing service models: IaaS, PaaS, and SaaS. Someone who compromises a cloud administrator's credentials has the equivalent of unmonitored physical access to your entire data center, with enough spare hard drives, fork lifts, and trucks to copy the entire thing and drive away. Or blow the entire thing up.
 
-* We cannot overstate the importance of hardening the management plane. It literally provides absolute control over your cloud deployment -- often including all disaster recovery.*
+*We cannot overstate the importance of hardening the management plane. It literally provides absolute control over your cloud deployment -- often including all disaster recovery.*
 
 We have five recommendations for securing the management plane:
 
@@ -247,7 +247,7 @@ All cloud platforms support internal identity and access management to varying d
 * In general use different groups, with different credentials, for different parts of your infrastructure. For example in production you could break out management by application stack.
 * If you need auditing on API calls, and your cloud platform doesn't support it, require administrators to connect through a proxy server that logs activity.
 
-Under these guidelines an attacker needs to break into multiple accounts to cause the worst damage. Notice that what we just described isn't necessarily easy to manage at scale -- this is an area where you would allocate the resources freed by reducing other risks such as patching.
+Under these guidelines an attacker needs to break into multiple accounts to cause the worst damage. Notice that what we just described isn't necessarily easy to manage at scale -- this is an area where you would allocate the resources freed from other security tasks such as patching.
 
 ###Hypersegregation with Security Groups
 
