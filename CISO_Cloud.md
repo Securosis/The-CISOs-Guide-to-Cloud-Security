@@ -4,21 +4,21 @@
 
 One of a CISO's most difficult challenges is sorting the valuable wheat from the overhyped chaff, and then figuring out what it means in terms of risk to your organization. There is no shortage of technology and threat trends, and CISOs need not to only determine which matter, but *how* they impact security.
 
-The rise of cloud computing is one of the truly transformative evolutions that fundamentally change core security practices. Far more than an outsourcing model, cloud computing alters the very fabric of our infrastructure, technology consumption, and delivery models. In the long run, the cloud and mobile computing are likely to mark a larger shift than the Internet.
+The rise of cloud computing is a truly transformative evolution that fundamentally change core security practices. Far more than an outsourcing model, cloud computing alters the very fabric of our infrastructure, technology consumption, and delivery models. In the long run, the cloud and mobile computing are likely to mark a larger shift than the Internet.
 
-This series details the critical differences between cloud computing and traditional infrastructure for security professionals, as well as where to focus security efforts. We will show that the cloud doesn't necessarily increase risks -- it shifts them, and provides new opportunities for significant security improvement.
+This paper details the critical differences between cloud computing and traditional infrastructure for security professionals, as well as where to focus security efforts. We will show that the cloud doesn't necessarily increase risks -- it shifts them, and provides new opportunities for significant security improvement.
 
 ###Different, but Not the Way You Think
 
 Cloud computing is a radically different technology model -- not just the latest flavor of outsourcing. It uses a combination of *abstraction* and *automation* to achieve previously impossible levels of efficiency and elasticity. But in the end cloud computing still relies on traditional infrastructure as its foundation. It doesn't eliminate physical servers, networks, or storage, but allows organizations to use them in different ways, with substantial benefits.
 
-Sometimes this means building your own cloud in your own datacenter; other times it means renting infrastructure, platforms, and applications from public providers over the Internet. Most organizations will use a combination of both. Public cloud services eliminate most capital expenses and shift them to on-demand operational costs. Private clouds allow more *efficient* use of capital, tend to reduce operational costs, and increase the responsiveness of technology to internal needs.
+Sometimes this means building your own cloud in your own datacenter; other times it means renting infrastructure, platforms, and applications from public providers over the Internet. Most organizations will use a combination of both. Public cloud services eliminate most capital expenses and shift them to on-demand operational costs. Private clouds allow more *efficient* use of capital, may reduce operational costs, and increase the responsiveness of technology to internal needs.
 
 Between the business benefits and current adoption rates, we expect cloud computing to become the dominant technology model over the next ten to fifteen years. As we make this transition *it is the technology that creates clouds, rather than the increased use of shared infrastructure, that really matters for security*. Multitenancy is more an emergent property of cloud computing than a defining characteristic.
 
 ###Security Is Evolving for the Cloud
 
-As you will see, cloud computing isn't more or less secure than traditional infrastructure -- it is *different*. Some risks are greater, some are new, some are reduced, and some are eliminated. The primary goal of this series is to provide an overview of where these changes occur, what you need to do about them, and when.
+As you will see, cloud computing isn't more or less secure than traditional infrastructure -- it is *different*. Some risks are greater, some are new, some are reduced, and some are eliminated. The primary goal of this paper is to provide an overview of where these changes occur, what you need to do about them, and when.
 
 Cloud security focuses on managing the different risks associate with abstraction and automation. Mutitenancy tends to be more a compliance issue than a security problem, and we will cover both aspects. Infrastructure and applications are opened up to network-based management via Internet APIs. Everything from core network routing to creating and destroying entire application stacks is now possible using command lines and web interfaces. The early security focus has been on managing risks introduced by highly dynamic virtualized environments such as autoscaled servers, and broad network access, including a major focus on compartmentalizing cloud management.
 
@@ -26,7 +26,7 @@ Over time the focus is gradually shifting to hardening the cloud infrastructure,
 
 We expect to eventually see more security teams hook into the cloud fabric itself -- bridging existing gaps between security tools and infrastructure and applications with *Software Defined Security*. The same APIs and programming techniques that power cloud computing can provide highly-integrated dynamic and responsive security controls -- [this is already happening](https://securosis.com/research/publication/a-practical-example-of-software-defined-security).
 
-This series will lay out the key differences, with suggestions for where security professionals should focus. Hopefully, by the end, you will look at the cloud and cloud security in a new light, and agree that the cloud isn't just the latest type of outsourcing.
+This paper describes the key differences, with suggestions for where security professionals should focus. Hopefully, by the end, you will look at the cloud and cloud security in a new light, and agree that the cloud isn't just the latest form of shared services.
 
 ##How the Cloud Is Different for Security
 
@@ -55,7 +55,7 @@ Virtualization has existed for a long time. The real power cloud computing adds 
 
 Users ask for resources via web page or API call, such as a new server with 1tb of storage on a particular subnet, and the cloud management software determines how best to provision it from the resource pool; then it handles installation, configuration, and coordinating all the networking, storage, and compute resources to pull everything together into a functional and accessible server. No human administrator required.
 
-Or the cloud can monitor demand on a cluster and add and remove fully load-balanced and configured systems based on rules, such as average system utilization over a specified threshold. Need more resources? Add virtual servers. Systems underutilized? Drop them back into the resource pool. In public cloud computing this keeps costs down as you expand and contract based on what you need. In private clouds it frees resources for other projects and requirements, but you still need a shared resource pool to handle overall demand. But you are no longer stuck with under-utilized physical boxes in one corner of your data center and inadequate capacity in another.
+Or the cloud can monitor demand on a cluster and add and remove fully load-balanced and configured systems based on rules, such as average system utilization over a specified threshold. Need more resources? Add virtual servers. Systems underutilized? Drop them back into the resource pool. Need to perform complex analysis on petabytes of storage? Just rent the storage space and processing power until the job is complete. In public cloud computing this keeps costs down as you expand and contract based on what you need. In private clouds it frees resources for other projects and requirements, but you still need a shared resource pool to handle overall demand. But you are no longer stuck with under-utilized physical boxes in one corner of your data center and inadequate capacity in another.
 
 This is true for all three main cloud delivery methods - *Infrastructure as a Service* (IaaS), *Platform as a Service* (PaaS) and *Software as a Service* (IaaS). You can expand and contract database storage, software application server capacity, the number of supported users, and storage as needed -- without additional capital investment.
 
@@ -69,7 +69,7 @@ But even more transformative is the capability for applications to *manage their
 
 ###Cloud, DevOps, and Security in Practice: Examples
 
-Here are a few examples that highlight the impact of abstraction and automation on security. We will address the security issues later in this paper.
+Here are a few examples that highlight the impact of abstraction and automation on operations and security:
 
 * **Autoscaling:** As mentioned above, many IaaS providers support autoscaling. A monitoring tool watches server load and other variables. When the average load of virtual machines exceeds a configurable threshold, new instances are launched from the same base image with advanced initialization scripts. These scripts can automatically configure all aspects of the server, pulling metadata from the cloud or a configuration management server. Advanced tools can configure entire application stacks. But these servers may only exist for a short period, perhaps never during a vulnerability assessment window. Or images may launch in the wrong zone, with the wrong network security rules. The images and initialization scripts might not be up to date for the latest security vulnerabilities, creating cracks in your defenses.
 * **Immutable Servers:** Autoscaling can spontaneously and automatically orchestrate the addition and subtraction of servers and other resources. The same concepts can eliminate the need to patch. Instead of patching a running server you might use the same scripting and configuration management techniques, behind a virtual load balancer, to launch new, up-to-date versions of a server and then destroy the unpatched virtual machines.
@@ -79,7 +79,7 @@ Here are a few examples that highlight the impact of abstraction and automation 
 
 Snapshots highlight some of the risks of abstraction. Autoscaling, some risks of automation, and management credentials, the risks of both. But Software Defined Security and immutable servers offer advantages. We will dig into specifics next, now that we have highlighted the core differences.
 
-And all that without mentioning multitenancy or outsourcing.
+And all that without once mentioning multitenancy or outsourcing.
 
 ##Adapting Security for Cloud Computing
 
@@ -114,7 +114,7 @@ We have five recommendations for securing the management plane:
 * If you manage a private cloud, ensure you harden the web and API servers, keeping all components up to date and protecting them with the highest levels of web application security. This is no different than protecting any other critical web server.
 * Leverage the Identity and Access Management features offered by the management plane. Some providers offer very fine-grained controls. Most also integrate with your existing IAM using federated identity. Give preference to your platform/provider's controls and...
 * Compartmentalize with IAM. No administrator should have full rights to all aspects of the cloud. Many providers and platforms support granular controls, including roles and groups, which you can leverage to restrict the damage potential of a compromised developer or workstation. For example, you can have a separate administrator for assigning IAM rights, only allow administrators to manage certain segments of your cloud, and further restrict them from terminating instances.
-* Add auditing, logging, and alerting where possible. This is one of the more difficult problems in cloud security because few cloud providers audit administrator activity -- such as who launched or stopped a server using the API. For now you will likely need a third-party tool or to work with particular providers for necessary auditing.
+* Add auditing, logging, and alerting where possible. This is one of the more difficult problems in cloud security because few cloud providers audit administrator activity -- such as who launched or stopped a server using the API. For now you will likely need a third-party tool or select providers with necessary auditing.
 * Consider using security or cloud management proxies. These tools and services proxy the connection between a cloud administrator and the public or private cloud management plane. They can apply additional security rules and fill logging and auditing gaps.
 
 ###Automate Host (Instance) Security
@@ -189,7 +189,7 @@ This section is a bit more advanced, but you can reap significant security advan
 * Automate more security. Embed security configurations and agents into images, or inject them into instances when they launch. Every virtual machine, when launched, can automatically configure host-based security -- especially if they can communicate with a management server designed for the cloud. For example, a host can register itself with a configuration management server, then secure running services by default depending on what the host is intended for. You could even automatically adjust Security Group firewall rules based on the software services running on the host, who owns it, and where it is in your application stack.
 * Standardize security with Platform as a Service. Hate patching database servers or configuring them properly? Struggle with developers and admins who open up too many services on application servers? Use Platform as a Service instead, and improve your ability to standardize security.
 * Build a security abstraction layer. Nothing prevents your security team from using the same cloud APIs and management tools as administrators and developers. Configured properly, this provides security oversight and control without interfering with development or operations. For example you could restrict management of cloud IAM to the security team, enabling them to assume management of a server in case of a security incident. The security team could control key network Security Groups and security in production, while still allowing developers to manage it themselves in more isolated development environments. Embed a host security agent into every image (or instance, using launch scripts) and security gains a hook into every running virtual machine.
-* Move to *Software Defined Security*. This concept is an extension of basic automation. Nothing prevents Security from writing its own programs using cloud APIs, and the APIs of security and operations tools, so you can create powerful and agile security controls. For example you could write a small program to find every instance in your environment that isn't linked into your configuration management tool, and recheck every few minutes. The tool would identify who launched the server, the operating system, where it was on the network, and the surrounding network security. You could, at a keystroke, take control of the server, notify the owner, and isolate it on the network until you know what it is for; then integrate it into configuration management and enforce security policies. All with perhaps 100 lines of code.
+* Move to *Software Defined Security*. This concept is an extension of basic automation. Security can write its own programs using cloud APIs, and the APIs of security and operations tools, to create powerful and agile security controls. For example you could write a small program to find every instance in your environment that isn't linked into your configuration management tool, and recheck every few minutes. The tool would identify who launched the server, the operating system, where it was on the network, and the surrounding network security. You could, at a keystroke, take control of the server, notify the owner, and isolate it on the network until you know what it is for; then integrate it into configuration management and enforce security policies. All with perhaps 100 lines of code.
 
 These should get you thinking -- they start to show how the cloud can nearly eradicate certain security problems and enable you to shift resources.
 
@@ -238,7 +238,7 @@ One of the largest new risks in cloud computing is Internet-accessible managemen
 
 All cloud platforms support internal identity and access management to varying degrees -- this is something you should look for during your selection process. You can use this to limit security risks -- not just to break out development and operations teams. The following isn't supported on all platforms yet but it gives you an idea of the options:
 
-* Create a Security Group and assign it IAM rights, and restrict these rights from all other groups. "IAM rights" means the security team manages new users, changes user and group rights, and prevents privilege escalation. They can even revoke administrative access to running instances by modifying the associated rights.
+* Create a security team group and assign it IAM rights, and restrict these rights from all other groups. "IAM rights" means the security team manages new users, changes user and group rights, and prevents privilege escalation. They can even revoke administrative access to running instances by modifying the associated rights.
 * Use separate cloud development and production groups and accounts. Even if you use DevOps require users to switch accounts for different tasks.
 * The development group can have complete control over a development environment, which is segregated from the operations environment. Restrict them to building and launching in cloud segments that are isolated from the Internet and only route back to your organization. Developers can have free access to create, destroy, and otherwise manage development instances.
 * In your production environment break out administrative tasks. Restrict all snapshotting and termination of instances to separate roles. This prevents attackers from copying data or destroying servers unless they manage to get into one of those accounts.
@@ -265,7 +265,7 @@ Better yet, instead of always leaving every server open to administrative access
 
 This setup is nearly impossible to create with traditional infrastructure. We cannot afford all those physical firewalls, and creating that many switch-based rules is a non-starter at scale. We could do it using host firewall rules, but managing those across multiple platforms in a dynamic environment is insanely complex.
 
-In this case the cloud offers substantially better security by default.
+In this case the cloud offers substantially *better security by default*.
 
 ##Where to Go from Here
 
